@@ -1,6 +1,6 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { first, lastValueFrom, map } from 'rxjs';
+import { lastValueFrom, map } from 'rxjs';
 
 import { IApiService } from './api.service.interface';
 

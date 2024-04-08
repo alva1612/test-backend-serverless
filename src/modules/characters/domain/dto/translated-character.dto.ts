@@ -1,6 +1,6 @@
 import { Gender } from './get-characters-swapi.dto';
 
-export interface SwapiCharacters {
+export interface TranslatedCharacter {
   nombre: string;
   altura: string;
   masa: string;

@@ -18,6 +18,10 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "noImplicitReturns": false,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "paths": {
+      "@/*": ["src/*"],
+      "@modules/*": ["src/modules/*"]
+    }
   }
 }

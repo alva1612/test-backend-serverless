@@ -1,5 +1,5 @@
 import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
-import { CharactersService } from '../../application/characters.service';
+import { CharactersService } from '@modules/characters/application/characters.service';
 
 @Controller('characters')
 export class CharactersController {
@@ -7,6 +7,6 @@ export class CharactersController {
 
   @Get('getPage/:page')
   async getPage(@Param('page', ParseIntPipe) page: number) {
-    return await this.charactersService.getPage(page);
+    return await this.charactersService.getPageTranslated(page);
   }
 }

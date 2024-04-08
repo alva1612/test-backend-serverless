@@ -1,5 +1,5 @@
-import { SwapiGetCharacterResponse } from '../dto/get-characters-swapi.dto';
+import { TranslatedCharacter } from '../dto/translated-character.dto';
 
 export interface ICharacterService {
-  getPage(page: number): Promise<SwapiGetCharacterResponse>;
+  getPageTranslated(page: number): Promise<TranslatedCharacter[]>;
 }

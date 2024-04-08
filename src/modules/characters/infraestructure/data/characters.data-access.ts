@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { ApiService } from 'src/modules/api/api.service';
-import { ICharactersDataAccess } from '../../domain/abstracts/characters.data-access.interface';
-import { SwapiGetCharacterResponse } from '../../domain/dto/get-characters-swapi.dto';
-import { DataProviderError } from '../../domain/errors/DataProvider.error';
+import { ApiService } from 'src/common/api/api.service';
+import { ICharactersDataAccess } from '@modules/characters/domain/abstracts/characters.data-access.interface';
+import { SwapiGetCharacterResponse } from '@modules/characters/domain/dto/get-characters-swapi.dto';
+import { DataProviderError } from '@modules/characters/domain/errors/DataProvider.error';
 
 @Injectable()
 export class CharactersDataAccess implements ICharactersDataAccess {
