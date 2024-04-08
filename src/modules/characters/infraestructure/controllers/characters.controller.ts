@@ -11,11 +11,26 @@ import {
 import { CharactersService } from '@modules/characters/application/characters.service';
 import { SwapiCharacters } from '@modules/characters/domain/dto/get-characters-swapi.dto';
 import { CreationError } from '../../domain/errors/Creation.error';
+import {
+  ApiExtraModels,
+  ApiOkResponse,
+  ApiTags,
+  getSchemaPath,
+} from '@nestjs/swagger';
+import { TranslatedCharacter } from '../../domain/dto/translated-character.dto';
 
+@ApiTags('Characters')
+@ApiExtraModels(TranslatedCharacter)
 @Controller('characters')
 export class CharactersController {
   constructor(private readonly charactersService: CharactersService) {}
 
+  @ApiOkResponse({
+    description: 'Get page of characters translated from SWAPI',
+    schema: {
+      allOf: [{ $ref: getSchemaPath(TranslatedCharacter) }],
+    },
+  })
   @Get('getPage/:page')
   async getPage(@Param('page', ParseIntPipe) page: number) {
     try {

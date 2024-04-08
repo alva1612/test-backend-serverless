@@ -32,7 +32,7 @@ export class CharactersService implements ICharacterService {
     }
   }
 
-  async getCustomCharacter(charId: string): Promise<any> {
+  async getCustomCharacter(charId: string): Promise<TranslatedCharacter> {
     const character = await this.characterRepository.getCustomCharacter(charId);
     return character.toTranslated();
   }

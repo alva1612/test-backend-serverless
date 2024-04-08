@@ -5,7 +5,7 @@ export interface SwapiGetCharacterResponse {
   results: SwapiCharacters[];
 }
 
-export interface SwapiCharacters {
+export class SwapiCharacters {
   name: string;
   height: string;
   mass: string;
