@@ -17,12 +17,7 @@ export class CharactersRepository {
   async getCustomCharacter(charId: string) {
     const output = await this.dynamoDataAccess.get(charId);
     const character = new Character(
-      Object.fromEntries(
-        Object.entries(output).map(([key, value]) => {
-          const data = Object.values(value)[0];
-          return [key, data];
-        }),
-      ) as SwapiCharacters,
+      this.dynamoDataAccess.outputToPlainObject<SwapiCharacters>(output),
     );
     return character;
   }

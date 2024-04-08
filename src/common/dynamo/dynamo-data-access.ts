@@ -3,7 +3,7 @@ import {
   GetItemCommand,
   PutItemCommand,
 } from '@aws-sdk/client-dynamodb';
-import { PutCommand, PutCommandOutput } from '@aws-sdk/lib-dynamodb';
+import { PutCommandOutput } from '@aws-sdk/lib-dynamodb';
 import { Inject, Injectable } from '@nestjs/common';
 import { docClient } from './dynamo.client';
 import { DynamoModuleOptionsToken } from './dynamo.constant';
@@ -37,5 +37,14 @@ export class DynamoDataAccess {
     const response = await docClient.send(command);
     if (!response?.Item) throw new Error('Item not found');
     return response.Item;
+  }
+
+  outputToPlainObject<T>(output: Record<string, AttributeValue>): T {
+    return Object.fromEntries(
+      Object.entries(output).map(([key, value]) => {
+        const data = Object.values(value)[0];
+        return [key, data];
+      }),
+    ) as T;
   }
 }
