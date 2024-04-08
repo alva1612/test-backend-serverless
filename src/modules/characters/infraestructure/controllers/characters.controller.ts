@@ -18,9 +18,10 @@ import {
   getSchemaPath,
 } from '@nestjs/swagger';
 import { TranslatedCharacter } from '../../domain/dto/translated-character.dto';
+import { ApiRes } from '@/common/dtos/response.interface';
 
 @ApiTags('Characters')
-@ApiExtraModels(TranslatedCharacter)
+@ApiExtraModels(TranslatedCharacter, ApiRes)
 @Controller('characters')
 export class CharactersController {
   constructor(private readonly charactersService: CharactersService) {}
@@ -28,7 +29,14 @@ export class CharactersController {
   @ApiOkResponse({
     description: 'Get page of characters translated from SWAPI',
     schema: {
-      allOf: [{ $ref: getSchemaPath(TranslatedCharacter) }],
+      type: 'object',
+      properties: {
+        statusCode: { type: 'number', example: 200 },
+        data: {
+          description: 'Characters translated from SWAPI',
+          allOf: [{ $ref: getSchemaPath(TranslatedCharacter) }],
+        },
+      },
     },
   })
   @Get('getPage/:page')
@@ -40,6 +48,19 @@ export class CharactersController {
     }
   }
 
+  @ApiOkResponse({
+    description: 'Create a custom character',
+    schema: {
+      type: 'object',
+      properties: {
+        statusCode: { type: 'number', example: 200 },
+        data: {
+          description: 'Characters created',
+          $ref: getSchemaPath(SwapiCharacters),
+        },
+      },
+    },
+  })
   @Post('create')
   async createCharacter(@Body() body: SwapiCharacters) {
     try {
@@ -49,6 +70,19 @@ export class CharactersController {
     }
   }
 
+  @ApiOkResponse({
+    description: 'Get one of custom characters',
+    schema: {
+      type: 'object',
+      properties: {
+        statusCode: { type: 'number', example: 200 },
+        data: {
+          description: 'Characters translated from SWAPI',
+          $ref: getSchemaPath(TranslatedCharacter),
+        },
+      },
+    },
+  })
   @Get('getCustom/:id')
   async getCustomCharacter(@Param('id', ParseUUIDPipe) id: string) {
     try {
