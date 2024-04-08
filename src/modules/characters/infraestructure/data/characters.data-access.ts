@@ -8,12 +8,12 @@ import { DataProviderError } from '@modules/characters/domain/errors/DataProvide
 export class CharactersDataAccess implements ICharactersDataAccess {
   constructor(private readonly apiService: ApiService) {}
 
-  async getPage(page: number = 1) {
+  async getPage(page: number) {
     try {
       const res = await this.apiService.get<SwapiGetCharacterResponse>(
         `https://swapi.py4e.com/api/people`,
         {
-          [`${page}`]: `${page}`,
+          page: `${page}`,
         },
       );
       return res;

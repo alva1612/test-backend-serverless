@@ -16,4 +16,10 @@ export class CharactersService implements ICharacterService {
     );
     return translatedCharacters;
   }
+
+  async createCustomCharacter(
+    character: TranslatedCharacter,
+  ): Promise<TranslatedCharacter> {
+    throw new Error('Method not implemented.');
+  }
 }
