@@ -23,9 +23,13 @@ export class CharactersService implements ICharacterService {
   }
 
   async createCustomCharacter(char: SwapiCharacters): Promise<SwapiCharacters> {
-    const character = new Character(char);
-    const output = await this.characterRepository.createCharacter(character);
-    return character.data;
+    try {
+      const character = new Character(char);
+      const output = await this.characterRepository.createCharacter(character);
+      return character.data;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async getCustomCharacter(charId: string): Promise<any> {
