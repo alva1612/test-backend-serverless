@@ -46,3 +46,9 @@ $ npm run sls:deploy
   # e2e testing folder
   test/
 ```
+
+## OpenApi - Swagger
+
+In order to access the OpenApi document, run the project locally and access:
+
+[http://localhost:3000/dev/api#/](http://localhost:3000/dev/api#/)
