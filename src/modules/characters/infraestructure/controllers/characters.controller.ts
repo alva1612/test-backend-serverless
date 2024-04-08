@@ -4,6 +4,7 @@ import {
   Get,
   Param,
   ParseIntPipe,
+  ParseUUIDPipe,
   Post,
 } from '@nestjs/common';
 import { CharactersService } from '@modules/characters/application/characters.service';
@@ -21,5 +22,10 @@ export class CharactersController {
   @Post('create')
   async createCharacter(@Body() body: SwapiCharacters) {
     return await this.charactersService.createCustomCharacter(body);
+  }
+
+  @Get('getCustom/:id')
+  async getCustomCharacter(@Param('id', ParseUUIDPipe) id: string) {
+    return await this.charactersService.getCustomCharacter(id);
   }
 }

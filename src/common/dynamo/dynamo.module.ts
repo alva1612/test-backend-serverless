@@ -5,6 +5,7 @@ import { DynamoModuleOptionsToken } from './dynamo.constant';
 
 export interface DynamoModuleOptions {
   tableName: string;
+  partitionKey: string;
 }
 
 @Module({})

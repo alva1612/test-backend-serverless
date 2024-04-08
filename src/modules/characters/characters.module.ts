@@ -9,6 +9,12 @@ import { CharactersRepository } from './infraestructure/data/characters.reposito
 @Module({
   controllers: [CharactersController],
   providers: [CharactersService, CharactersDataAccess, CharactersRepository],
-  imports: [ApiModule, DynamoModule.register({ tableName: 'charactersTable' })],
+  imports: [
+    ApiModule,
+    DynamoModule.register({
+      tableName: 'charactersTable',
+      partitionKey: 'CharactersId',
+    }),
+  ],
 })
 export class CharactersModule {}
