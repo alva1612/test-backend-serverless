@@ -3,10 +3,15 @@ import { ICharacterService } from '@modules/characters/domain/abstracts/characte
 import { TranslatedCharacter } from '@modules/characters/domain/dto/translated-character.dto';
 import { Character } from '@modules/characters/domain/entities/character.entity';
 import { CharactersDataAccess } from '@modules/characters/infraestructure/data/characters.data-access';
+import { SwapiCharacters } from '../domain/dto/get-characters-swapi.dto';
+import { CharactersRepository } from '../infraestructure/data/characters.repository';
 
 @Injectable()
 export class CharactersService implements ICharacterService {
-  constructor(private readonly characterProvider: CharactersDataAccess) {}
+  constructor(
+    private readonly characterProvider: CharactersDataAccess,
+    private readonly characterRepository: CharactersRepository,
+  ) {}
 
   async getPageTranslated(page: number): Promise<TranslatedCharacter[]> {
     const res = await this.characterProvider.getPage(page);
@@ -17,9 +22,11 @@ export class CharactersService implements ICharacterService {
     return translatedCharacters;
   }
 
-  async createCustomCharacter(
-    character: TranslatedCharacter,
-  ): Promise<TranslatedCharacter> {
-    throw new Error('Method not implemented.');
+  async createCustomCharacter(char: SwapiCharacters): Promise<SwapiCharacters> {
+    const character = new Character(char);
+    console.log({ character });
+    const output = await this.characterRepository.createCharacter(character);
+    console.log({ output });
+    return character.data;
   }
 }
