@@ -19,7 +19,6 @@ export class DynamoDataAccess {
   async create(
     createDto: Record<string, AttributeValue>,
   ): Promise<PutCommandOutput> {
-    console.log({ createDto });
     const command = new PutItemCommand({
       TableName: this.options.tableName,
       Item: createDto,
@@ -36,7 +35,6 @@ export class DynamoDataAccess {
       },
     });
     const response = await docClient.send(command);
-    console.log({ item: response.Item });
     if (!response?.Item) throw new Error('Item not found');
     return response.Item;
   }
